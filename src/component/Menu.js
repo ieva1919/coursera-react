@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap'
+import { Card, CardImg, CardBody, CardTitle, Row, Col } from 'reactstrap'
+import DishdetailComponent from './DishdetailComponent'
 
 class Menu extends Component {
 
@@ -18,13 +19,34 @@ class Menu extends Component {
     renderDish(dish) {
         if (dish != null) {
             return (
-                <Card>
-                    <CardImg width='50%' object src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle heading>{dish.name}</CardTitle>
-                        <CardTitle> {dish.description}</CardTitle>
-                    </CardBody>
-                </Card>
+                <Row>
+                    <Col className="col-12 col-md-6">
+                        <Card>
+                            <div className="m-1">
+                                <CardImg object src={dish.image} alt={dish.name} />
+                                <CardBody >
+                                    <CardTitle heading><h1>{dish.name}</h1></CardTitle>
+                                    <CardTitle> {dish.description}</CardTitle>
+                                </CardBody>
+                            </div>
+                        </Card>
+                    </Col>
+                    <Col className="col-12 col-md-6">
+                        <Card>
+                            <div className="m-1">
+                                <CardBody>
+                                    <h2>Comment </h2>
+                                    {dish.comments.map((comment) => (
+                                        <div>
+                                            <p>{comment.comment}</p>
+                                            <p>-- {comment.author}, {comment.date}</p>
+                                        </div>
+                                    ))}
+                                </CardBody>
+                            </div>
+                        </Card>
+                    </Col>
+                </Row >
             )
         } else {
             return (
@@ -37,14 +59,10 @@ class Menu extends Component {
 
         const menu = this.props.dishes.map((dish) => {
             return (
-                <div key={dish.id} className="col-12 col-md-5 m-1">
-                    <Card onClick={() => this.onDishSelect(dish)}>
-                        <CardImg width='50%' object src={dish.image} alt={dish.name} />
-                        <CardImgOverlay>
-                            <CardTitle heading>{dish.name}</CardTitle>
-                        </CardImgOverlay>
-                    </Card>
-                </div>
+                <DishdetailComponent
+                    dish={dish}
+                    onDishSelect={() => this.onDishSelect(dish)}
+                />
             )
         });
 
@@ -53,9 +71,7 @@ class Menu extends Component {
                 <div className="row">
                     {menu}
                 </div>
-                <div className="row">
-                    {this.renderDish(this.state.selectedDish)}
-                </div>
+                {this.renderDish(this.state.selectedDish)}
             </div>
         )
     }
