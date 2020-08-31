@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap'
 
-class DishdetailComponent extends Component {
+class Dishdetail extends Component {
 
     render() {
 
         const dish = this.props.dish
+
+        if (!dish) {
+            return null
+        }
 
         return (
             <div key={dish.id} className="col-12 col-md-6">
@@ -21,4 +25,4 @@ class DishdetailComponent extends Component {
 
 }
 
-export default DishdetailComponent;
+export default Dishdetail;

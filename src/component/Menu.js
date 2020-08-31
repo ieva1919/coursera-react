@@ -1,19 +1,13 @@
 import React, { Component } from 'react'
 import { Card, CardImg, CardBody, CardTitle, Row, Col } from 'reactstrap'
-import DishdetailComponent from './DishdetailComponent'
+import Dishdetail from './Dishdetail'
+import './Menu.scss';
 
 class Menu extends Component {
 
     constructor(props) {
         super(props)
 
-        this.state = {
-            selectedDish: null
-        }
-    }
-
-    onDishSelect(dish) {
-        this.setState({ selectedDish: dish })
     }
 
     renderDish(dish) {
@@ -33,14 +27,14 @@ class Menu extends Component {
                     </Col>
                     <Col className="col-12 col-md-6">
                         <Card>
-                            <div className="m-1">
+                            <div className="m-1 cardtext">
                                 <CardBody>
-                                    <h2>Comment </h2>
+                                    <h4>Comment </h4>
                                     {dish.comments.map((comment) => (
-                                        <div>
-                                            <p>{comment.comment}</p>
-                                            <p>-- {comment.author}, {comment.date}</p>
-                                        </div>
+                                        <ul>
+                                            <li>{comment.comment}</li>
+                                            <li>-- {comment.author}, {comment.date}</li>
+                                        </ul>
                                     ))}
                                 </CardBody>
                             </div>
@@ -59,9 +53,9 @@ class Menu extends Component {
 
         const menu = this.props.dishes.map((dish) => {
             return (
-                <DishdetailComponent
+                <Dishdetail
                     dish={dish}
-                    onDishSelect={() => this.onDishSelect(dish)}
+                    onDishSelect={() => this.props.onDishSelect(dish.id)}
                 />
             )
         });
@@ -71,7 +65,7 @@ class Menu extends Component {
                 <div className="row">
                     {menu}
                 </div>
-                {this.renderDish(this.state.selectedDish)}
+                {this.renderDish(this.props.selectedDish)}
             </div>
         )
     }
