@@ -9,6 +9,7 @@ import { PROMOTIONS } from '../shared/promotions'
 import Header from './Header'
 import Footer from './Footer'
 import { Route, Switch, Redirect } from 'react-router-dom';
+import Dishdetail from './Dishdetail';
 
 class Main extends Component {
 
@@ -35,12 +36,23 @@ class Main extends Component {
             )
         }
 
+        const DishWithId = ({ match }) => {
+            const dish = this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]
+            return (
+                <Dishdetail
+                    dish={dish}
+                    comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
+                />
+            )
+        }
+
         return (
             <div className="app">
                 <Header />
                 <Switch>
                     <Route path="/home" component={HomePage} />
                     <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
+                    <Route path="/menu/:dishId" component={DishWithId} />
                     <Route exact path="/contactus" component={Contact} />
                     <Redirect to="/home" />
                 </Switch>

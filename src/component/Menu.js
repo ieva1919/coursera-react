@@ -1,7 +1,7 @@
 import React from 'react'
-import { Card, CardImg, CardBody, CardTitle, Row, Col } from 'reactstrap'
-import Dishdetail from './Dishdetail'
+import { Card, CardImg, CardBody, CardTitle, Row, Col, Breadcrumb, BreadcrumbItem, CardImgOverlay } from 'reactstrap'
 import './Menu.scss';
+import { Link } from 'react-router-dom'
 
 
 function RenderMenuItem({ dish }) {
@@ -22,15 +22,31 @@ const Menu = props => {
 
     const menu = props.dishes.map((dish) => {
         return (
-            <Dishdetail
-                dish={dish}
-                onDishSelect={() => props.onDishSelect(dish.id)}
-            />
+            <div key={dish.id} className="col-12 col-md-6">
+                <Card className="m-1">
+                    <Link to={`/menu/${dish.id}`}>
+                        <CardImg object src={dish.image} alt={dish.name} />
+                        <CardImgOverlay>
+                            <CardTitle heading>{dish.name}</CardTitle>
+                        </CardImgOverlay>
+                    </Link>
+                </Card>
+            </div>
         )
     });
 
     return (
         <div className="container">
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>Menu</BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>Menu</h3>
+                    <hr />
+                </div>
+            </div>
             <div className="row">
                 {menu}
             </div>
@@ -42,26 +58,16 @@ const Menu = props => {
 function renderDish(dish) {
     if (dish != null) {
         return (
-            <Row>
-                <Col className="col-12 col-md-6">
-                    <RenderMenuItem dish={dish} />
-                </Col>
-                <Col className="col-12 col-md-6">
-                    <Card>
-                        <div className="m-1 cardtext">
-                            <CardBody>
-                                <h4>Comment </h4>
-                                {dish.comments.map((comment) => (
-                                    <ul>
-                                        <li>{comment.comment}</li>
-                                        <li>-- {comment.author}, {comment.date}</li>
-                                    </ul>
-                                ))}
-                            </CardBody>
-                        </div>
-                    </Card>
-                </Col>
-            </Row >
+            <div>
+
+                <Row>
+                    <Col className="col-12 col-md-6">
+                        <RenderMenuItem dish={dish} />
+                    </Col>
+                    <Col className="col-12 col-md-6">
+                    </Col>
+                </Row >
+            </div>
         )
     } else {
         return (
