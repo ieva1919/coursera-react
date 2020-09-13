@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardImg, CardImgOverlay, CardTitle, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import CommentForm from './CommentForm.js'
 
 
 function Dishdetail({ dish, comments }) {
@@ -45,6 +46,7 @@ function Dishdetail({ dish, comments }) {
                                 ))}
                             </CardBody>
                         </div>
+                        <CommentForm />
                     </Card>
                 </div>
             </div>
