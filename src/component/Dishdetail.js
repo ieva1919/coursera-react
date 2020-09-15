@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import CommentForm from './CommentForm.js'
 
 
-function Dishdetail({ dish, comments }) {
+function Dishdetail({ dish, comments, addComment }) {
 
     if (!dish) {
         return null
@@ -46,7 +46,10 @@ function Dishdetail({ dish, comments }) {
                                 ))}
                             </CardBody>
                         </div>
-                        <CommentForm />
+                        <CommentForm
+                            dishId={dish.id}
+                            addComment={addComment}
+                        />
                     </Card>
                 </div>
             </div>

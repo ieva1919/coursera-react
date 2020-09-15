@@ -7,13 +7,13 @@ const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
 
-function CommentForm() {
+function CommentForm({ addComment, dishId }) {
 
     const [isModalOpenForComment, setIsModalOpenForComment] = useState(false);
 
     function renderComments(data) {
         setIsModalOpenForComment(false)
-        alert("Your Raiting: " + data.raiting + " Your Name: " + data.name + " Comment: " + data.comment)
+        addComment(dishId, data.rating, data.name, data.comment)
     }
 
 
