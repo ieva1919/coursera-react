@@ -2,11 +2,31 @@ import React from 'react'
 import { Card, CardImg, CardImgOverlay, CardTitle, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import CommentForm from './CommentForm.js'
+import { Loading } from './Loading';
 
 
-function Dishdetail({ dish, comments, addComment }) {
+function Dishdetail({ dish, comments, addComment, isLoading, errMess }) {
 
-    if (!dish) {
+
+    if (isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (errMess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (!dish) {
         return null
     }
 
