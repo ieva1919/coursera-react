@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import CommentForm from './CommentForm.js'
 import { Loading } from './Loading';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
 function Dishdetail({ dish, comments, postComment, isLoading, errMess }) {
@@ -45,26 +46,36 @@ function Dishdetail({ dish, comments, postComment, isLoading, errMess }) {
             </div>
             <div className="row">
                 <div key={dish.id} className="col-6 col-md-6">
-                    <Card className="m-1">
-                        <Link to={`/menu/${dish.id}`}>
-                            <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-                            <CardImgOverlay>
-                                <CardTitle heading>{dish.name}</CardTitle>
-                            </CardImgOverlay>
-                        </Link>
-                    </Card>
+                    <FadeTransform
+                        in
+                        transformProps={{
+                            exitTransform: 'scale(0.5) translateY(-50%)'
+                        }}>
+                        <Card className="m-1">
+                            <Link to={`/menu/${dish.id}`}>
+                                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                                <CardImgOverlay>
+                                    <CardTitle heading>{dish.name}</CardTitle>
+                                </CardImgOverlay>
+                            </Link>
+                        </Card>
+                    </FadeTransform>
                 </div>
                 <div key={dish.id} className="col-6 col-md-6">
                     <Card>
                         <div className="m-1 cardtext">
                             <CardBody>
                                 <h4>Comment </h4>
-                                {comments.map((comment) => (
-                                    <ul>
-                                        <li>{comment.comment}</li>
-                                        <li>-- {comment.author}, {comment.date}</li>
-                                    </ul>
-                                ))}
+                                <Stagger in>
+                                    {comments.map((comment) => (
+                                        <ul>
+                                            <Fade in>
+                                                <li>{comment.comment}</li>
+                                                <li>-- {comment.author}, {comment.date}</li>
+                                            </Fade>
+                                        </ul>
+                                    ))}
+                                </Stagger>
                             </CardBody>
                         </div>
                         <CommentForm
