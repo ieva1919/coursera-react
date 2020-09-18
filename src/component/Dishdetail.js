@@ -6,7 +6,7 @@ import { Loading } from './Loading';
 import { baseUrl } from '../shared/baseUrl';
 
 
-function Dishdetail({ dish, comments, addComment, isLoading, errMess }) {
+function Dishdetail({ dish, comments, postComment, isLoading, errMess }) {
 
 
     if (isLoading) {
@@ -69,7 +69,7 @@ function Dishdetail({ dish, comments, addComment, isLoading, errMess }) {
                         </div>
                         <CommentForm
                             dishId={dish.id}
-                            addComment={addComment}
+                            postComment={postComment}
                         />
                     </Card>
                 </div>
