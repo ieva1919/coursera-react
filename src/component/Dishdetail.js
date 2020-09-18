@@ -3,6 +3,7 @@ import { Card, CardImg, CardImgOverlay, CardTitle, CardBody, Breadcrumb, Breadcr
 import { Link } from 'react-router-dom'
 import CommentForm from './CommentForm.js'
 import { Loading } from './Loading';
+import { baseUrl } from '../shared/baseUrl';
 
 
 function Dishdetail({ dish, comments, addComment, isLoading, errMess }) {
@@ -46,7 +47,7 @@ function Dishdetail({ dish, comments, addComment, isLoading, errMess }) {
                 <div key={dish.id} className="col-6 col-md-6">
                     <Card className="m-1">
                         <Link to={`/menu/${dish.id}`}>
-                            <CardImg object src={dish.image} alt={dish.name} />
+                            <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                             <CardImgOverlay>
                                 <CardTitle heading>{dish.name}</CardTitle>
                             </CardImgOverlay>

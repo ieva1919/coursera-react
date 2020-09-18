@@ -3,13 +3,14 @@ import { Card, CardImg, CardBody, CardTitle, Row, Col, Breadcrumb, BreadcrumbIte
 import './Menu.scss';
 import { Link } from 'react-router-dom'
 import { Loading } from './Loading';
+import { baseUrl } from '../shared/baseUrl';
 
 
 function RenderMenuItem({ dish }) {
     return (
         <Card>
             <div className="m-1">
-                <CardImg object src={dish.image} alt={dish.name} />
+                <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody >
                     <CardTitle heading><h1>{dish.name}</h1></CardTitle>
                     <CardTitle> {dish.description}</CardTitle>
