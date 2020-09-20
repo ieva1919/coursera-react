@@ -1,19 +1,30 @@
 import React from 'react'
 import { Media } from 'reactstrap';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderLeader({ leader }) {
     return (
-        <Media>
+        <FadeTransform
+            in
+            transformProps={{
+                exitTransform: 'scale(0.5) translateY(-50%)'
+            }}>
             <Media>
-                <Media object src={leader.image} alt="portrait" />
-            </Media>
-            <Media body>
-                <Media heading className="heading">
-                    {leader.designation}
+                <Stagger in>
+                    <Media>
+                        <Fade in>
+                            <Media object src={leader.image} alt="portrait" />
+                        </Fade>
+                    </Media>
+                </Stagger>
+                <Media body>
+                    <Media heading className="heading">
+                        {leader.designation}
+                    </Media>
+                    {leader.description}
                 </Media>
-                {leader.description}
             </Media>
-        </Media>
+        </FadeTransform>
     )
 }
 

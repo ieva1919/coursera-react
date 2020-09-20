@@ -5,7 +5,7 @@ import RenderLeader from './RenderLeader.js'
 
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
+    const leaders = props.leaders.leaders.map((leader) => {
         return (
             <p>Leader {leader.name}</p>
         );
@@ -66,9 +66,10 @@ function About(props) {
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
-                    {props.leaders.map((leader) => {
+                    {console.log(props.leaders)}
+                    {props.leaders.leaders.map((leader) => {
                         return (
-                            <RenderLeader leader={leader} />
+                            <RenderLeader leader={leader} isLoading={props.leaderLoading} errMess={props.leaderErrMess} />
                         )
                     })}
                 </div>
